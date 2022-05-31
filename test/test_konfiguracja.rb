@@ -2,12 +2,5 @@
 
 require "test_helper"
 
-class TestKonfiguracja < Minitest::Test
-  def test_that_it_has_a_version_number
-    refute_nil ::Konfiguracja::VERSION
-  end
-
-  def test_it_does_something_useful
-    assert false
-  end
+class TestKonfiguracja < Minitest::Spec
 end

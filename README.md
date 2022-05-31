@@ -1,8 +1,24 @@
 # Konfiguracja
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/konfiguracja`. To experiment with that code, run `bin/console` for an interactive prompt.
+`Konfiguracja` is a flexible DSL for configurations inspired by [anyway_config](https://github.com/palkan/anyway_config) gem and powered by [dry-rb](https://dry-rb.org/) stack.
 
-TODO: Delete this and the text above, and describe your gem
+## Features
+
+| Feature | Rails | Anyway Config | Konfiguracja |
+| --- | ---:| ---:| ---:|
+| Load data from `config/app.yml` | ✅ | ✅ | ✅ |
+| Load data from `secrets` | ❌ | ✅ | TODO |
+| Load data from `credentials` | ❌ | ✅ | TODO |
+| Load data from environment | ❌ | ✅ | TODO |
+| Load data from [custom sources](#loaders) | ❌ | ✅ | ✅ |
+| Local config files | ❌ | ✅ | TODO |
+| Type coercion | ❌ | ✅ | ✅ |
+| [Source tracing](#tracing) | ❌ | ✅ | TODO |
+| Return Hash with indifferent access | ❌ | ✅ | ❌ |
+| Support ERB\* within `config/app.yml` | ✅ | ✅ | ✅ |
+| Raise if file doesn't exist | ✅ | ❌ | ❌ |
+| Works without Rails | 😀 | ✅ | ✅ |
+| Shouts when required data not provided | ❌ | ✅ | ✅ |
 
 ## Installation
 
@@ -16,7 +32,31 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
 ## Usage
 
-TODO: Write usage instructions here
+To define a config inherit from `Konfiguracja::Config` and declare attributes with [dry-struct](https://dry-rb.org/gems/dry-struct/) DSL:
+
+```ruby
+class AppConfig < Konfiguracja::Config
+  attribute :foo, Dry.Types::String
+  attribute :nested do
+    attribute :bar, Dry.Types::Boolean
+  end
+end
+```
+
+Such config will load data from:
+
+* `config/app.yml`
+* `config/app.local.yml`
+* `APP_FOO`, `APP_NESTED__BAR` environment variables
+* explicit values passed to initializer
+
+## Configuration
+
+*TODO*
+
+## Loaders
+
+*TODO*
 
 ## Development
 
