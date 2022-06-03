@@ -7,15 +7,15 @@
 | Feature | Rails | Anyway Config | Konfiguracja |
 | --- | ---:| ---:| ---:|
 | Load data from `config/app.yml` | ✅ | ✅ | ✅ |
-| Load data from `secrets` | ❌ | ✅ | TODO |
-| Load data from `credentials` | ❌ | ✅ | TODO |
-| Load data from environment | ❌ | ✅ | TODO |
+| Load data from `secrets` | ❌ | ✅ | WIP |
+| Load data from `credentials` | ❌ | ✅ | WIP |
+| Load data from environment | ❌ | ✅ | ✅ |
 | Load data from [custom sources](#loaders) | ❌ | ✅ | ✅ |
-| Local config files | ❌ | ✅ | TODO |
+| Local config files | ❌ | ✅ | WIP |
 | Type coercion | ❌ | ✅ | ✅ |
-| [Source tracing](#tracing) | ❌ | ✅ | TODO |
+| [Source tracing](#tracing) | ❌ | ✅ | WIP |
 | Return Hash with indifferent access | ❌ | ✅ | ❌ |
-| Support ERB\* within `config/app.yml` | ✅ | ✅ | ✅ |
+| Support ERB within `config/app.yml` | ✅ | ✅ | ✅ |
 | Raise if file doesn't exist | ✅ | ❌ | ❌ |
 | Works without Rails | 😀 | ✅ | ✅ |
 | Shouts when required data not provided | ❌ | ✅ | ✅ |
@@ -43,20 +43,26 @@ class AppConfig < Konfiguracja::Config
 end
 ```
 
-Such config will load data from:
+Such config will load data from (last one wins):
 
 * `config/app.yml`
-* `config/app.local.yml`
+* `config/app.local.yml` (**WIP**)
 * `APP_FOO`, `APP_NESTED__BAR` environment variables
 * explicit values passed to initializer
 
-## Configuration
-
-*TODO*
-
 ## Loaders
 
-*TODO*
+### Yaml
+
+By default it loads data from `./config/config_name.yml`. You can change the path by initializing a new loader:
+
+```ruby
+Konfiguracja.loaders.replace(:yaml, Konfiguracja::Loaders::Yaml.new(config_path: "path/to/yaml/files"))
+```
+
+### Env
+
+Env loader will read envs prefixed with `CONFIG_NAME_`. Nested keys has to be separated by double underscore `__` e.g. `CONFIG_NAME_FOO__BAR` will end up with `ConfigName(foo: {bar: val})`.
 
 ## Development
 
