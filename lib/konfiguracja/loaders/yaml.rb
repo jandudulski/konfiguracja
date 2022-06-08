@@ -8,9 +8,10 @@ module Konfiguracja
       extend Dry::Initializer
 
       option :config_path, proc { |path| Pathname.new(path) }
+      option :suffix, default: proc { ".yml" }
 
       def load_for(config)
-        config_file = config_path.join("#{config.config_name}.yml")
+        config_file = config_path.join("#{config.config_name}#{suffix}")
         return {} unless config_file.file?
 
         config_file

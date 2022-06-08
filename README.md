@@ -11,7 +11,7 @@
 | Load data from `credentials` | ❌ | ✅ | WIP |
 | Load data from environment | ❌ | ✅ | ✅ |
 | Load data from [custom sources](#loaders) | ❌ | ✅ | ✅ |
-| Local config files | ❌ | ✅ | WIP |
+| Local config files | ❌ | ✅ | ✅ |
 | Type coercion | ❌ | ✅ | ✅ |
 | [Source tracing](#tracing) | ❌ | ✅ | WIP |
 | Return Hash with indifferent access | ❌ | ✅ | ❌ |
@@ -46,7 +46,7 @@ end
 Such config will load data from (last one wins):
 
 * `config/app.yml`
-* `config/app.local.yml` (**WIP**)
+* `config/app.local.yml`
 * `APP_FOO`, `APP_NESTED__BAR` environment variables
 * explicit values passed to initializer
 
@@ -59,6 +59,17 @@ By default it loads data from `./config/config_name.yml`. You can change the pat
 ```ruby
 Konfiguracja.loaders.replace(:yaml, Konfiguracja::Loaders::Yaml.new(config_path: "path/to/yaml/files"))
 ```
+
+### Local Yaml
+
+By default it loads data from `./config/config_name.local.yml`. You can change the path by initializing a new loader:
+
+
+```ruby
+Konfiguracja.loaders.replace(:local_yaml, Konfiguracja::Loaders::LocalYaml.new(config_path: "path/to/local/yaml/files"))
+```
+
+You should also add `*.local.yml` to `.gitignore` - the idea is that local yaml config files allows you to define values specific for developers machine.
 
 ### Env
 

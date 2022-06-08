@@ -90,5 +90,23 @@ module Konfiguracja
         assert_equal "value", config.nested.erb
       end
     end
+
+    DevConfig = Class.new(Config) do
+      attribute :foo, Dry.Types::String
+      attribute :bar, Dry.Types::String
+    end
+
+    it "prefers local yaml over regular one" do
+      local_yaml = Loaders::LocalYaml.new(
+        config_path: "test/fixtures"
+      )
+
+      Konfiguracja.loaders.replace(:local_yaml, local_yaml)
+
+      config = DevConfig.new
+
+      assert_equal "FOO", config.foo
+      assert_equal "BAR", config.bar
+    end
   end
 end
