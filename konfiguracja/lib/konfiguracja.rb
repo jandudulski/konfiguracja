@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "dry-configurable"
 require "dry-struct"
 
 require_relative "konfiguracja/version"
@@ -12,6 +13,6 @@ module Konfiguracja
 
   extend Dry::Configurable
 
-  setting :loaders, Loaders.default_loaders, reader: true
-  setting :inflector, Dry::Inflector.new
+  setting :loaders, default: Loaders.default_loaders, reader: true
+  setting :inflector, default: Dry::Inflector.new
 end

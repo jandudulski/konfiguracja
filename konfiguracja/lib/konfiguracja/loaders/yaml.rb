@@ -1,5 +1,6 @@
 require "erb"
 require "yaml"
+require "pathname"
 require "dry-initializer"
 
 module Konfiguracja
@@ -12,7 +13,7 @@ module Konfiguracja
 
       def load_for(config)
         config_file = config_path.join("#{config.config_name}#{suffix}")
-        return {} unless config_file.file?
+        return Dry::Core::Constants::EMPTY_HASH unless config_file.file?
 
         config_file
           .read

@@ -27,4 +27,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rails", ">= 7.0.3"
   spec.add_dependency "konfiguracja", "= 0.0.0"
+
+  spec.add_development_dependency "standard", "~> 1.3"
 end
