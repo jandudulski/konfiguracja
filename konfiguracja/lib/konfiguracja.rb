@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
+require "zeitwerk"
+loader = Zeitwerk::Loader.for_gem
+loader.setup
+
 require "dry-configurable"
 require "dry-struct"
-
-require_relative "konfiguracja/version"
-
-require_relative "konfiguracja/loaders"
-require_relative "konfiguracja/config"
 
 module Konfiguracja
   class Error < StandardError; end

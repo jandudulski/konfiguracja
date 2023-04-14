@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Konfiguracja
   module Loaders
     def self.default_loaders
@@ -9,8 +11,3 @@ module Konfiguracja
     end
   end
 end
-
-require_relative "loaders/registry"
-require_relative "loaders/yaml"
-require_relative "loaders/local_yaml"
-require_relative "loaders/env"
