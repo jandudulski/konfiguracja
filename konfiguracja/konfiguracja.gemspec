@@ -38,6 +38,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dry-struct", "~> 1.0"
   spec.add_dependency "dry-initializer", "~> 3.0"
 
-  spec.add_development_dependency "with_env", "~> 1.1"
+  spec.add_development_dependency "standard", "~> 1.3"
   spec.add_development_dependency "steep", "~> 1.3"
+  spec.add_development_dependency "with_env", "~> 1.1"
 end
